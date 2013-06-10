@@ -1,0 +1,18 @@
+#!/usr/bin/ruby
+
+require 'fileutils'
+
+env = ARGV.first
+
+recipes = Dir.glob("./nodes/*.rb").map do |file|
+  file.split("/").last.chomp(".rb")
+end
+unless recipes.include? env
+  puts "Invalid environment => #{env || 'missing'}"
+  exit
+end
+
+# valid environment
+ENV["SPRINKLE_ENV"] = env
+
+system 'sprinkle -cvs install.rb'

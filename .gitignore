@@ -1,0 +1,4 @@
+attributes/*.yml
+files/*
+
+!.gitkeep

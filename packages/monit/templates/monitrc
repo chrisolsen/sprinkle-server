@@ -1,0 +1,25 @@
+# Polling frequency
+set daemon 20
+
+# Logging
+set logfile /var/log/monit.log
+
+set mailserver localhost port 25
+  with timeout 30 seconds
+
+set mail-format {
+  from: monit@$HOST
+  subject: $SERVICE $EVENT at $DATE
+  message: Monit $ACTION $SERVICE at $DATE on $HOST,
+
+  Dutifully,
+  Monit
+}
+
+# Web interface
+set httpd port 2812 and
+  use address localhost
+  allow localhost
+
+# Include config files
+include /etc/monit/conf.d/*

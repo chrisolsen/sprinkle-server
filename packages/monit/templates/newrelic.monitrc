@@ -1,0 +1,16 @@
+check process newrelic-daemon with pidfile /var/run/newrelic-daemon.pid
+  # start program = "/etc/init.d/newrelic-daemon start; sleep 2"
+  # stop program = "/etc/init.d/newrelic-daemon stop; sleep 2"
+  if 5 restarts with 5 cycles then timeout
+  if cpu is greater than 30% for 2 cycles then alert
+  if cpu is greater than 50% for 5 cycles then restart
+  if totalmem is greater than 50.0 MB for 5 cycles then restart
+  if children is greater than 10 then restart
+
+check process newrelic-sysmond with pidfile /var/run/nrsysmond.pid
+  if 5 restarts with 5 cycles then timeout
+  if cpu is greater than 30% for 2 cycles then alert
+  if cpu is greater than 50% for 5 cycles then restart
+  if totalmem is greater than 50.0 MB for 5 cycles then restart
+  if children is greater than 10 then restart
+
